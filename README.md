@@ -34,124 +34,87 @@ Each file must begin with a comment containing your details:
 
 ## Exercise 1: Mobile Money Fee Calculator
 
-### Task
+/* Name: OKOT CLEMENT */
+/* Student Number: 25/U/BIE/05306/PE */
 
-Write a program that asks the user to enter:
+#include <stdio.h>
+int main(){
+    float amount, fee ;
+    printf("enter the amount to be sent:");
+    scanf("%f", &amount);
 
-- amount to send  
-- transaction fee (%)  
+    if (amount <= 100){
+        fee = 0.05 * amount;
+        printf("the fee is: %f\n", fee);
+    }
+        else if (amount<= 2500){
+            fee = 0.04 * amount;
+            printf("the fee is: %f\n", fee);
+        }
+        else if (amount <= 10000){
+            fee = 0.03 * amount;
+            printf("the fee is: %f\n", fee);
+        }
+        else if (amount <= 30000){ 
+            fee = 0.02 * amount;
+            printf("the fee is: %f\n", fee);
+        }
+        else if (amount > 60000){
+            fee = 0.01 * amount;
+            printf("the fee is: %f\n", fee);
+        }
+    return 0;
+}
 
-The program should calculate and display:
-
-- fee amount  
-- total amount deducted  
-
-### Example
-
-    Enter amount to send: 10000
-    Enter transaction fee (%): 1.5
-
-    Transaction fee: 150.00 UGX
-    Total deducted: 10150.00 UGX
-
----
 
 ## Exercise 2: Fuel Efficiency Calculator
 
-### Task
+/* Name: OKOT CLEMENT */
+/* Student Number: 25/U/BIE/05306/PE */
 
-Write a program that asks the user to enter:
+#include <stdio.h>
+int main(){
+    float distance, fuel_efficiency, fuel_used;
+    printf("Enter the distance to be traveled (in kilometers): ");
+    scanf("%f", &distance);
+    printf("Enter the fuel used of the vehicle (in liters): ");
+    scanf("%f", &fuel_used);
+    fuel_efficiency = distance / fuel_used;
+    printf("The amount of fuel efficiency is: %f km/l\n", fuel_efficiency);
+    return 0;
+}
 
-- distance travelled (km)  
-- fuel used (litres)  
-
-The program should calculate and display:
-
-- fuel efficiency (km/litre)  
-
-### Example
-
-    Enter distance (km): 300
-    Enter fuel used (litres): 20
-
-    Fuel efficiency: 15.00 km/l
-
----
 
 ## Exercise 3: Electricity Bill Calculator
 
-### Task
+/* OKOT CLEMENT */
+/* Student Number: 25/U/BIE/05306/PE */
 
-Write a program that asks the user to enter:
+#include <stdio.h>
+int main(){
+    float units, bill_amount, cost_per_unit;
+    printf("enter the number of units consumed:");
+    scanf("%f", &units);
+    printf("enter the cost per unit:");
+    scanf("%f", &cost_per_unit);
+    if (units <= 100){
+        bill_amount = 0.5 * units * cost_per_unit;
+        printf("the bill amount is: %f\n", bill_amount);
+    }
+    else if (units > 100 && units <= 200){
+        bill_amount = 0.75 * units * cost_per_unit;
+        printf("the bill amount is: %f\n", bill_amount);
+    }
+    else if (units > 200 && units <= 300){
+        bill_amount = 1.20 * units * cost_per_unit;
+        printf("the bill amount is: %f\n", bill_amount);
+    }
+    else if (units > 300){
+        bill_amount = 1.50 * units *cost_per_unit;
+        printf("the bill amount is: %f\n", bill_amount);
+    }
+    return 0;  
+    }
 
-- units consumed  
-- cost per unit  
 
-The program should calculate and display:
-
-- total electricity bill  
-
-### Example
-
-    Enter units consumed: 120
-    Enter cost per unit: 750
-
-    Total bill: 90000.00 UGX
-
----
-
-## Requirements
-
-- Use `scanf()` for input  
-- Use `printf()` for output  
-- Use appropriate variable types (`int`, `float`)  
-- Display decimal values using `%.2f`  
-- Include units where appropriate  
-- Use meaningful variable names  
-- Do not change file names  
-
----
-
-## Bonus (Optional)
-
-Format your output like a report or receipt.
-
-### Example
-
-    ----- TRANSACTION SUMMARY -----
-    Amount Sent: 10000.00 UGX
-    Fee: 150.00 UGX
-    Total Deducted: 10150.00 UGX
-    -------------------------------
-
----
-
-## Marking Guide
-
-| Item | Marks |
-|------|-------|
-| Mobile Money Program | 30 |
-| Fuel Program | 25 |
-| Electricity Program | 30 |
-| Header Comment (All Files) | 15 |
-
-Total: 100 Marks
-
----
-
-## Submission
-
-Push your work to your GitHub Classroom repository:
-
-    git add .
-    git commit -m "Completed assignment 1"
-    git push
-
----
-
-## Important Notes
-
-- Programs must compile and run without errors  
-- Include your name and student number in every file  
-- Missing header comments will reduce marks  
-- Ensure inputs are read correctly using `scanf()`  
+orrectly using `scanf()`  
