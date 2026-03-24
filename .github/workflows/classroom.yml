@@ -1,0 +1,93 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Mobile Money
+      id: mobile-money
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Mobile Money
+        setup-command: gcc ex1_mobile_money.c -o ex1
+        command: "./ex1"
+        input: |-
+          10000
+          1.5
+        expected-output: '150.00'
+        comparison-method: contains
+        timeout: 10
+        max-score: 15
+    - name: Mobile Money Total
+      id: mobile-money-total
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Mobile Money Total
+        setup-command: gcc ex1_mobile_money.c -o ex1
+        command: "./ex1"
+        input: |-
+          10000
+          1.5
+        expected-output: '10150.00'
+        comparison-method: contains
+        timeout: 10
+        max-score: 15
+    - name: Fuel Efficiency
+      id: fuel-efficiency
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Fuel Efficiency
+        setup-command: gcc ex2_fuel.c -o ex2
+        command: "./ex2"
+        input: |-
+          300
+          20
+        expected-output: '15.00'
+        comparison-method: contains
+        timeout: 10
+        max-score: 25
+    - name: Electricity Bill
+      id: electricity-bill
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Electricity Bill
+        setup-command: gcc ex3_electricity.c -o ex3
+        command: "./ex3"
+        input: |-
+          120
+          750
+        expected-output: '90000.00'
+        comparison-method: contains
+        timeout: 10
+        max-score: 30
+    - name: Header Comment
+      id: header-comment
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Header Comment
+        setup-command: ''
+        command: grep -qi "Name:" ex1_mobile_money.c && grep -qi "Student Number:"
+          ex1_mobile_money.c && grep -qi "Name:" ex2_fuel.c && grep -qi "Student Number:"
+          ex2_fuel.c && grep -qi "Name:" ex3_electricity.c && grep -qi "Student Number:"
+          ex3_electricity.c
+        timeout: 10
+        max-score: 15
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        MOBILE-MONEY_RESULTS: "${{steps.mobile-money.outputs.result}}"
+        MOBILE-MONEY-TOTAL_RESULTS: "${{steps.mobile-money-total.outputs.result}}"
+        FUEL-EFFICIENCY_RESULTS: "${{steps.fuel-efficiency.outputs.result}}"
+        ELECTRICITY-BILL_RESULTS: "${{steps.electricity-bill.outputs.result}}"
+        HEADER-COMMENT_RESULTS: "${{steps.header-comment.outputs.result}}"
+      with:
+        runners: mobile-money,mobile-money-total,fuel-efficiency,electricity-bill,header-comment
